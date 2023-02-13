@@ -627,6 +627,53 @@ describe("HOTScript", () => {
         type test1 = Expect<Equal<res1, 3>>;
       });
     });
+
+    describe("Less than", () => {
+      it("should return false when two numbers are equal", () => {
+        type res1 = Call<Numbers.LessThan<4>, 4>;
+        type test1 = Expect<Equal<res1, false>>;
+      });
+
+      it("should return false when first is greater than second", () => {
+        type res1 = Call<Numbers.LessThan<5>, 4>;
+        type test1 = Expect<Equal<res1, false>>;
+      });
+
+      it("should return true when first is less than second", () => {
+        type res1 = Call<Numbers.LessThan<4>, 5>;
+        type test1 = Expect<Equal<res1, true>>;
+      });
+
+      it("should return a boolean array when given only one argument", () => {
+        //check if the argument is less than every value in the array 
+        type res1 = Call<Tuples.Map<Numbers.LessThan<13>>, [4, 15, 6]>;
+        type test1 = Expect<Equal<res1, [false, true, false]>>;
+      });
+    })
+
+    describe("Less than or equal", () => {
+      it("should return true when two two numbers are equal", () => {
+        type res1 = Call<Numbers.LessThanOrEqual<4>, 4>;
+        type test1 = Expect<Equal<res1, true>>;
+      });
+
+      it("should return false when first is greater than second", () => {
+        type res1 = Call<Numbers.LessThanOrEqual<5>, 4>;
+        type test1 = Expect<Equal<res1, false>>;
+      });
+
+      it("should return true when first is less than second", () => {
+        type res1 = Call<Numbers.LessThanOrEqual<4>, 5>;
+        type test1 = Expect<Equal<res1, true>>;
+      });
+
+      it("should return a boolean array when given only one argument", () => {
+        //check if the argument is less than or equal to every value in the array 
+        type res1 = Call<Tuples.Map<Numbers.LessThanOrEqual<13>>, [4, 15, 6, 13]>;
+        type test1 = Expect<Equal<res1, [false, true, false, true]>>;
+      });
+
+    });
   });
 
   describe("Strings", () => {
